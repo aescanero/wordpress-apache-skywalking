@@ -27,7 +27,8 @@ COPY --from=builder /usr/local/bin/sky-php-agent /usr/local/bin/
 COPY --from=builder /usr/src/wordpress/wp-content/plugins/woocommerce /usr/src/wordpress/wp-content/plugins/
 
 ADD entrypoint.sh /usr/local/bin
+RUN chmod 555 /usr/local/bin/entrypoint.sh
 
 VOLUME /var/www/html
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
